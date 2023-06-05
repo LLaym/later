@@ -3,7 +3,6 @@ package ru.practicum.user;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
