@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class FakeUserRepository implements UserRepository {
+public class FakeUserRepositoryImpl implements UserRepository {
 //    private static final List<User> FAKE_USERS = createManyFakeUsers(3);
     private static final List<User> FAKE_USERS = new ArrayList<>();
     private static Long nextId = 1L;
