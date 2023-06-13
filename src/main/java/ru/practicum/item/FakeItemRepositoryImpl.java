@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ItemRepositoryImpl implements ItemRepository {
+public class FakeItemRepositoryImpl implements ItemRepository {
     private static final Map<Long, Item> FAKE_ITEMS = new HashMap<>();
     private static Long nextId = 1L;
 
