@@ -23,7 +23,7 @@ public class ItemController {
 
     @PostMapping
     public ItemDTO create(@RequestHeader("X-Later-User-Id") Long userId,
-                    @RequestBody ItemCreationDTO itemDTO) {
+                          @RequestBody ItemCreationDTO itemDTO) {
         Item item = new Item();
         item.setUserId(itemDTO.getUserId());
         item.setUrl(itemDTO.getUrl());
@@ -36,7 +36,7 @@ public class ItemController {
 
     @DeleteMapping("/{itemId}")
     public void delete(@RequestHeader("X-Later-User-Id") long userId,
-                           @PathVariable long itemId) {
+                       @PathVariable long itemId) {
         itemService.deleteItem(userId, itemId);
     }
 }
