@@ -25,3 +25,8 @@ replay_pid*
 
 # Idea
 .idea
+
+target
+HELP.md
+mvnw
+mvnw.cmd
