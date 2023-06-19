@@ -13,21 +13,19 @@ class ItemServiceImpl implements ItemService {
     private final ItemRepository repository;
 
     @Override
-    public List<ItemDto> getItems(long userId) {
-        List<Item> userItems = repository.findByUserId(userId);
-        return ItemMapper.mapToItemDto(userItems);
+    public List<Item> getAllByUserId(long userId) {
+        return repository.findByUserId(userId);
     }
 
     @Transactional
     @Override
-    public ItemDto addNewItem(long userId, ItemDto itemDto) {
-        Item item = repository.save(ItemMapper.mapToItem(itemDto, userId));
-        return ItemMapper.mapToItemDto(item);
+    public Item addNew(Item item) {
+        return repository.save(item);
     }
 
     @Transactional
     @Override
-    public void deleteItem(long userId, long itemId) {
-        repository.deleteByUserIdAndItemId(userId, itemId);
+    public void deleteById(long userId, long itemId) {
+        repository.deleteByUserIdAndId(userId, itemId);
     }
 }

@@ -12,16 +12,14 @@ import java.util.List;
 class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
-    @Override
-    public List<UserDto> getAllUsers() {
-        List<User> users = repository.findAll();
-        return UserMapper.mapToUserDto(users);
-    }
-
     @Transactional
     @Override
-    public UserDto saveUser(UserDto userDto) {
-        User user = repository.save(UserMapper.mapToNewUser(userDto));
-        return UserMapper.mapToUserDto(user);
+    public User addNew(User user) {
+        return repository.save(user);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return repository.findAll();
     }
 }

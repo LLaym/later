@@ -10,7 +10,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "items")
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +23,10 @@ class Item {
 
     @Column
     private String url;
-    // здесь остальные поля
 
     @ElementCollection
-    @CollectionTable(name="tags", joinColumns=@JoinColumn(name="item_id"))
-    @Column(name="name")
+    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "item_id"))
+    @Column(name = "name")
     private Set<String> tags = new HashSet<>();
 
     @Override

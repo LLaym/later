@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/items")
@@ -11,20 +12,24 @@ import java.util.List;
 public class ItemController {
     private final ItemService itemService;
 
-    @GetMapping
-    public List<ItemDto> get(@RequestHeader("X-Later-User-Id") long userId) {
-        return itemService.getItems(userId);
-    }
-
     @PostMapping
     public ItemDto add(@RequestHeader("X-Later-User-Id") Long userId,
-                       @RequestBody ItemDto item) {
-        return itemService.addNewItem(userId, item);
+                       @RequestBody ItemDto itemDto) {
+        Item item = ItemMapper.toItem(itemDto, userId);
+
+        return ItemMapper.toItemDto(itemService.addNew(item));
+    }
+
+    @GetMapping
+    public List<ItemDto> get(@RequestHeader("X-Later-User-Id") long userId) {
+        return itemService.getAllByUserId(userId).stream()
+                .map(ItemMapper::toItemDto)
+                .collect(Collectors.toList());
     }
 
     @DeleteMapping("/{itemId}")
-    public void deleteItem(@RequestHeader("X-Later-User-Id") long userId,
+    public void deleteById(@RequestHeader("X-Later-User-Id") long userId,
                            @PathVariable long itemId) {
-        itemService.deleteItem(userId, itemId);
+        itemService.deleteById(userId, itemId);
     }
 }
