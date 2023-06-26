@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/items")
@@ -12,24 +12,28 @@ import java.util.stream.Collectors;
 public class ItemController {
     private final ItemService itemService;
 
-    @PostMapping
-    public ItemDto add(@RequestHeader("X-Later-User-Id") Long userId,
-                       @RequestBody ItemDto itemDto) {
-        Item item = ItemMapper.toItem(itemDto, userId);
-
-        return ItemMapper.toItemDto(itemService.addNew(item));
+    @GetMapping
+    public List<ItemDto> get(@RequestHeader("X-Later-User-Id") long userId,
+                             @RequestParam(required = false) Set<String> tags) {
+        if(tags == null || tags.isEmpty()) {
+            return itemService.getItems(userId);
+        } else {
+            return itemService.getItems(userId, tags);
+        }
     }
 
-    @GetMapping
-    public List<ItemDto> get(@RequestHeader("X-Later-User-Id") long userId) {
-        return itemService.getAllByUserId(userId).stream()
-                .map(ItemMapper::toItemDto)
-                .collect(Collectors.toList());
+    @GetMapping(params = "lastName")
+    public List<ItemDto> get(@RequestParam String lastName) {
+        return itemService.getUserItems(lastName);
+    }
+
+    @PostMapping
+    public ItemDto add(@RequestHeader("X-Later-User-Id") Long userId, @RequestBody ItemDto item) {
+        return itemService.addNewItem(userId, item);
     }
 
     @DeleteMapping("/{itemId}")
-    public void deleteById(@RequestHeader("X-Later-User-Id") long userId,
-                           @PathVariable long itemId) {
-        itemService.deleteById(userId, itemId);
+    public void deleteItem(@RequestHeader("X-Later-User-Id") long userId, @PathVariable long itemId) {
+        itemService.deleteItem(userId, itemId);
     }
 }

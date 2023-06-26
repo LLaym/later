@@ -8,10 +8,8 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "users")
-@Getter
-@Setter
-@ToString
+@Table(name = "users", schema = "public")
+@Getter @Setter @ToString
 public class User {
 
     @Id

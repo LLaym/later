@@ -24,3 +24,12 @@ CREATE TABLE IF NOT EXISTS tags
     name    VARCHAR(50),
     CONSTRAINT fk_tags_to_items FOREIGN KEY (item_id) REFERENCES items (id)
 );
+
+CREATE TABLE IF NOT EXISTS item_notes
+(
+    id        BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    item_id   BIGINT,
+    text      VARCHAR(1000),
+    note_date timestamp,
+    CONSTRAINT items FOREIGN KEY (item_id) REFERENCES items (id)
+);

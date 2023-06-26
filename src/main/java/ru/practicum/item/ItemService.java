@@ -1,11 +1,23 @@
 package ru.practicum.item;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.Set;
 
+@Transactional(readOnly = true)
 interface ItemService {
-    List<Item> getAllByUserId(long userId);
+    List<ItemDto> getItems(long userId);
 
-    Item addNew(Item item);
+    @Transactional
+    ItemDto addNewItem(long userId, ItemDto itemDto);
 
-    void deleteById(long userId, long itemId);
+    @Transactional
+    void deleteItem(long userId, long itemId);
+
+    @Transactional(readOnly = true)
+    List<ItemDto> getItems(long userId, Set<String> tags);
+
+    @Transactional(readOnly = true)
+    List<ItemDto> getUserItems(String lastName);
 }

@@ -3,6 +3,7 @@ package ru.practicum.item;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import ru.practicum.user.User;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,16 +11,15 @@ import java.util.Set;
 
 @Entity
 @Table(name = "items")
-@Getter
-@Setter
-@ToString
-class Item {
+@Getter @Setter @ToString
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private User user;
 
     @Column
     private String url;
