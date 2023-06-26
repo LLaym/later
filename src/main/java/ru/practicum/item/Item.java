@@ -3,6 +3,7 @@ package ru.practicum.item;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import ru.practicum.user.User;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,21 +12,21 @@ import java.util.Set;
 @Entity
 @Table(name = "items")
 @Getter @Setter @ToString
-class Item {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private User user;
 
     @Column
     private String url;
-    // здесь остальные поля
 
     @ElementCollection
-    @CollectionTable(name="tags", joinColumns=@JoinColumn(name="item_id"))
-    @Column(name="name")
+    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "item_id"))
+    @Column(name = "name")
     private Set<String> tags = new HashSet<>();
 
     @Override
