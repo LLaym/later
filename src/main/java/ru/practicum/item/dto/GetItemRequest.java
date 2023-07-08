@@ -27,7 +27,7 @@ public class GetItemRequest {
         request.setState(State.valueOf(state.toUpperCase()));
         request.setContentType(ContentType.valueOf(contentType.toUpperCase()));
         request.setSort(Sort.valueOf(sort.toUpperCase()));
-        if(tags != null) {
+        if (tags != null) {
             request.setTags(tags);
         }
         return request;
@@ -37,7 +37,9 @@ public class GetItemRequest {
         return tags != null && !tags.isEmpty();
     }
 
-    public enum State {UNREAD, READ, ALL }
-    public enum ContentType { ARTICLE, VIDEO, IMAGE, ALL }
-    public enum Sort { NEWEST, OLDEST, TITLE, SITE }
+    public enum State {UNREAD, READ, ALL}
+
+    public enum ContentType {ARTICLE, VIDEO, IMAGE, ALL}
+
+    public enum Sort {NEWEST, OLDEST, TITLE, SITE}
 }

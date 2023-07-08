@@ -8,7 +8,6 @@ import ru.practicum.item.dto.ItemDto;
 import ru.practicum.item.dto.ModifyItemRequest;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/items")

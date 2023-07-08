@@ -23,16 +23,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+// TODO: 08.07.2023 ADD TESTS
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
+    private final ObjectMapper mapper = new ObjectMapper();
     @Mock
     private UserService userService;
-
     @InjectMocks
     private UserController controller;
-
-    private final ObjectMapper mapper = new ObjectMapper();
-
     private MockMvc mvc;
 
     private UserDto userDto;

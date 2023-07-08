@@ -12,16 +12,15 @@ import java.util.Set;
 
 @Entity
 @Table(name = "items")
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    // исключаем все поля с отложенной загрузкой из
-    // метода toString, чтобы не было случайных обращений
-    // базе данных, например при выводе в лог.
     @ToString.Exclude
     private User user;
 
@@ -48,8 +47,8 @@ public class Item {
     private Instant dateResolved;
 
     @ElementCollection
-    @CollectionTable(name="tags", joinColumns=@JoinColumn(name="item_id"))
-    @Column(name="name")
+    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "item_id"))
+    @Column(name = "name")
     private Set<String> tags = new HashSet<>();
 
     @Override

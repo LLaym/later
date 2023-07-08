@@ -44,7 +44,6 @@ final class ItemMapper {
                 .mimeType(item.getMimeType())
                 .unread(item.isUnread())
                 .dateResolved(dtFormatter.format(item.getDateResolved()))
-                // Нужно скопировать все элементы в новую коллекцию - чтобы запустить механизм ленивой загрузки.
                 .tags(new HashSet<>(item.getTags()))
                 .build();
     }
