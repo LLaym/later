@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ItemNoteRepository extends JpaRepository<ItemNote, Long> {
+interface ItemNoteRepository extends JpaRepository<ItemNote, Long> {
+
     List<ItemNote> findAllByItemUrlContainingAndItemUserId(String itemUrl, Long userId);
 
     @Query("select itNote " +
